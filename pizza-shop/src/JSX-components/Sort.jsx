@@ -1,4 +1,24 @@
+import React from 'react'
+
 export default function Sort() {
+
+    const[isVisible, setIsvisible] = React.useState(false)
+    const[activeSort, setActiveSort] = React.useState(0)
+
+    function onClickListItem(i){
+      setActiveSort(i);
+      setIsvisible(false);
+    }
+
+
+    function swither(){
+      setIsvisible(prevValue => !prevValue )
+    }
+
+    const sortArr = [ "популярности","цене","алфавиту"]
+
+    const sortItem=sortArr.map((item,i) => <li onClick={()=>onClickListItem(i)} className={activeSort===i?"active":""} key={i}>{item}</li>)
+
     return(
         <div className="sort">
               <div className="sort__label">
@@ -15,15 +35,24 @@ export default function Sort() {
                   />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>популярности</span>
+                <span onClick={swither}>{sortArr[activeSort]}</span>
               </div>
-              <div className="sort__popup">
+              {/* <div className="sort__popup">
                 <ul>
                   <li className="active">популярности</li>
                   <li>цене</li>
                   <li>алфавиту</li>
                 </ul>
-              </div>
+              </div> */}
+              {isVisible &&
+              <div className="sort__popup">
+                <ul>
+                  {/* <li className="active">популярности</li>
+                  <li>цене</li>
+                  <li>алфавиту</li> */}
+                  {sortItem}
+                </ul>
+              </div>}
         </div>
     )
 }

@@ -4,7 +4,24 @@ import Header from "./JSX-components/Header"
 import Categories from "./JSX-components/Categories"
 import Sort from "./JSX-components/Sort"
 import Card from "./JSX-components/Card"
+import PizzasData from "./pizzas"
+
 function App() {
+
+  const pizzaCards = PizzasData.map(item => {
+
+  
+
+    
+    return(
+      <Card 
+       key = {item.id}
+      {...item}
+      />
+    )
+  })
+
+ 
   return (
 
     <div className="wrapper">
@@ -17,7 +34,7 @@ function App() {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            <Card title="Украинская"/>
+            {pizzaCards}
           </div>
         </div>
       </div>
